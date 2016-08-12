@@ -1,0 +1,27 @@
+form {
+    color: #FFF;
+    padding-left: 20%;
+    margin-top: 20px;
+}
+
+.row {
+    width: 100%;
+    display: flex;
+}
+
+#canvas {
+    background-color: #222;
+    width: calc(100% - 200px);
+    height: 100%;
+    float: left;
+}
+
+#sidebar {
+    background-color: #333;
+    float:left;
+    width: 200px;
+}
+
+input[type="number"] {
+    max-width: 40px;
+}
