@@ -1,16 +1,38 @@
 (function(R) {
+    var points = [
+            { x: 50, y: 50 },
+            { x: 150, y: 50 },
+            { x: 250, y: 50 },
+            { x: 350, y: 50 },
+            { x: 50, y: 350 },
+            { x: 150, y: 350 },
+            { x: 250, y: 350 },
+            { x: 350, y: 350 },
+            { x: 50, y: 150 },
+            { x: 50, y: 250 },
+            { x: 350, y: 150 },
+            { x: 350, y: 250 }
+        ];
 
     function dragStart(x, y, e) {
+        if(this.animating) {
+            this.already_animating = true;
+            return;
+        }
+        this.already_animating = false;
         this.animating = true;
         this.current_transform = this.transform();
     }
 
     function dragMove(dx, dy, x, y, e) {
+        if(this.already_animating) return;
         this.transform(this.current_transform+'T'+dx+','+dy)
             .updatePaths();
     }
 
     function dragEnd(e) {
+        if(this.already_animating) return;
+        
         var that = this;
 
         this.animate({
@@ -113,57 +135,6 @@
         }).init(200, 200);
 
         r1.id = "id" + r1.id;
-
-        var points = [
-            {
-                x: 50,
-                y: 50
-            },
-            {
-                x: 150,
-                y: 50
-            },
-            {
-                x: 250,
-                y: 50
-            },
-            {
-                x: 350,
-                y: 50
-            },
-            {
-                x: 50,
-                y: 350
-            },
-            {
-                x: 150,
-                y: 350
-            },
-            {
-                x: 250,
-                y: 350
-            },
-            {
-                x: 350,
-                y: 350
-            },
-            {
-                x: 50,
-                y: 150
-            },
-            {
-                x: 50,
-                y: 250
-            },
-            {
-                x: 350,
-                y: 150
-            },
-            {
-                x: 350,
-                y: 250
-            }
-        ];
 
         for (var i = 0; i < points.length; i++) {
             var sqr = paper.rect(0, 0, 50, 50).attr({
